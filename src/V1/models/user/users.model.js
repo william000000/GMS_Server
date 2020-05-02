@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import roles from './role.model';
 
-const Schema = mongoose.Schema;
-const userSchema = new Schema({
-	firstName: { type: String, required: true },
-	lastName: { type: String, required: true },
-	email: { type: String, required: true },
-	telephone: { type: Number, required: true },
-	role_id: { type: Number, required: true }, 
-	garage_id: { type: Number, required: true }
+const userSchema = new mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  firstName: { type: String, required: [true, 'firstName can\'t be blank'] },
+  lastName: { type: String, required: [true, 'lastName can\'t be blank'] },
+  email: { type: String, unique: true },
+  phoneNumber: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, $ref: roles},
+  // role: roles.roleSchema._id,
 });
 
-const userModel = mongoose.model("Users", userSchema);
-
-export default userModel;
+export default mongoose.model('users', userSchema);

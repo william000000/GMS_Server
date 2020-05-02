@@ -6,7 +6,8 @@
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev": "nodemon --exec babel-node src/app.js",
-    "test": "nyc --export=text mocha --require @babel/register ./src/V1/tests/*.js --exit"
+    "test": "NODE_ENV=test nyc --export=text mocha --require @babel/register ./src/V1/tests/*.js --exit",
+    "seed": "seed -u mongodb://127.0.0.1:27017/gms_server --drop-database ./src/V1/database/seed-data"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "coveralls": "^3.0.11",
+    "eslint": "^7.2.0",
     "mocha": "^7.1.1",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^2.0.3",
@@ -45,6 +47,12 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.10"
+    "express-validator": "^6.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongo-seeding-cli": "^3.4.1",
+    "mongoose": "^5.9.10",
+    "mongoose-uuid2": "^2.3.0",
+    "path": "^0.12.7",
+    "superagent": "^5.2.2"
   }
 }
