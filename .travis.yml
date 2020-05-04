@@ -1,12 +1,16 @@
 language: node_js
 node_js:
-  - "stable"
-services: mongodb
+  - "12"
 install:
-  - npm ci
+  - npm i
+cache:
+  directories:
+    - node_modules/
+services:
+  - mongodb
 before_script:
   - sleep 15
-  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  - mongo gms_server --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
 script:
   - npm test
 after_success:
