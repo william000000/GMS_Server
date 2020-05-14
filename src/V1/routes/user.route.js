@@ -1,11 +1,10 @@
 import { Router } from "express";
+import userController from "../controllers/user.controller.js";
 
 const route = Router();
 
-route.get("/sample", (req, res) => {
-	return res
-		.status(200)
-		.send({ status: 200, message: "Add APIs regarding auth" });
-});
+// Add APIs regarding auth
+
+route.post("/signin", userController.signin);
 
 export default route;
