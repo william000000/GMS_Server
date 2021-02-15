@@ -1,11 +1,8 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import Users from './users.model';
 
-const Schema = mongoose.Schema;
-
-const garageSchema = new Schema({
-	garage_name: { type: String, required: true },
+const garageSchema = new mongoose.Schema({
+  owner_id: [{ type: String, $ref: Users }],
 });
 
-const garageModel = mongoose.model("Garages", garageSchema);
-
-export default garageModel;
+export default mongoose.model('garages', garageSchema);

@@ -1,8 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import dbConnection from './V1/database/mongoConnection';
+import dbConnection from "./V1/database/mongoConnection";
 import V1 from "./V1";
+import responseHandler from "./V1/helpers/responseHandler";
 
 dotenv.config();
 
@@ -18,14 +19,11 @@ app.use("/api", V1);
 
 // When the route or path entered is incorrect
 app.use((req, res, next) =>
-	next({
-		status: 404,
-		message: "The route is currently unavailable",
-	})
+	next(responseHandler(res, "The route is currently unavailable", 404))
 );
 
 // Set up mongoose connection
-dbConnection()
+dbConnection();
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -34,4 +32,3 @@ app.listen(PORT, () => {
 });
 
 export default app;
-
